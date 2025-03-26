@@ -54,49 +54,17 @@ if (isset($_COOKIE["nis"])) {
 
     <link href="../vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="../vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <link href="../vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="../vendor/nouislider/nouislider.min.css">
+    <link href="../vendor/select2/css/select2.min.css" rel="stylesheet" />
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
     <!-- Datatable -->
     <link href="../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Custom Stylesheet -->
-
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/lightbox.css">
 
 </head>
 
 <body>
-
-    <!--*******************
-        Cursor start
-    ********************-->
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <!--*******************
-        Cursor end
-    ********************-->
 
     <!--*******************
         Preloader start
@@ -602,725 +570,644 @@ if (isset($_COOKIE["nis"])) {
     ***********************************-->
 
 
-        <!--**********************************
-        Scripts
-        ***********************************-->
-        <!-- Required vendors -->
-        <script src="../js/lightbox-plus-jquery.js"></script>
-        <script src="../vendor/global/global.min.js"></script>
-        <script src="../vendor/chart.js/Chart.bundle.min.js"></script>
+    <!--**********************************
+    Scripts
+    ***********************************-->
 
-        <script src="../vendor/chart.js/Chart.bundle.min.js"></script>
-        <!-- Apex Chart -->
-        <script src="../vendor/apexchart/apexchart.js"></script>
-        <!-- Apex Chart -->
-        <!-- <script src="../vendor/lightgallery/js/lightgallery-all.min.js"></script> -->
+    <!-- Required vendors -->
+    <script src="../vendor/global/global.min.js"></script>
 
-        <!-- Datatable -->
+    <!-- Apex Chart -->
+    <script src="../vendor/apexchart/apexchart.js"></script>
 
-        <script src="../vendor/peity/jquery.peity.min.js"></script>
-        <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="../js/plugins-init/datatables.init.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-        <script src="../vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-        <!-- Chart piety plugin files -->
-        <script src="../vendor/peity/jquery.peity.min.js"></script>
-        <!-- Dashboard 1 -->
-        <script src="../js/dashboard/dashboard-1.js"></script>
-        <script src="../js/custom.min.js"></script>
-        <script src="../js/dlabnav-init.js"></script>
-        <script src="../js/demo.js"></script>
-        <script src="../js/styleSwitcher.js"></script>
-        <!-- <script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        var jq36 = jQuery.noConflict(true); // Simpan jQuery 3.6.0 dalam variabel baru
-        </script> -->
+    <!-- Datatable -->
+    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../js/plugins-init/datatables.init.js"></script>
+    <script src="../vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="../vendor/select2/js/select2.full.min.js"></script>
 
-        <script>
-        jQuery(document).ready(function() {
-            setTimeout(function() {
-                dlabSettingsOptions.version = 'dark';
-                new dlabSettings(dlabSettingsOptions);
-            }, 100); // Kurangi delay agar lebih cepat
-        });
+    <!-- Chart piety plugin files -->
+    <script src="../vendor/peity/jquery.peity.min.js"></script>
 
-        // This script handles theme setting, preloader styling, and proper class handling
-        // Place this at the end of your HTML body, right before closing </body> tag
+    <!-- Dashboard 1 -->
+    <script src="../js/dashboard/dashboard-1.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/dlabnav-init.js"></script>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // 1. Fix preloader background color to match current theme
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.style.backgroundColor = '#1e1e1e'; // Dark background for preloader
-            }
-            
-            // 2. Proper theme cookie handling
-            function setThemeCookie(theme) {
-                const expiryDate = new Date();
-                expiryDate.setMonth(expiryDate.getMonth() + 6); // Cookie expires in 6 months
-                document.cookie = "dlabTheme=" + theme + "; expires=" + expiryDate.toUTCString() + "; path=/; SameSite=Strict";
-            }
-            
-            function getThemeCookie() {
-                const name = "dlabTheme=";
-                const decodedCookie = decodeURIComponent(document.cookie);
-                const ca = decodedCookie.split(';');
-                for(let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) === ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) === 0) {
-                        return c.substring(name.length, c.length);
-                    }
+
+    <script>
+
+    jQuery(document).ready(function() {
+        setTimeout(function() {
+            dlabSettingsOptions.version = 'dark';
+            new dlabSettings(dlabSettingsOptions);
+        }, 100); // Kurangi delay agar lebih cepat
+    });
+
+    // This script handles theme setting, preloader styling, and proper class handling
+    // Place this at the end of your HTML body, right before closing </body> tag
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Fix preloader background color to match current theme
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.style.backgroundColor = '#1e1e1e'; // Dark background for preloader
+        }
+        
+        // 2. Proper theme cookie handling
+        function setThemeCookie(theme) {
+            const expiryDate = new Date();
+            expiryDate.setMonth(expiryDate.getMonth() + 6); // Cookie expires in 6 months
+            document.cookie = "dlabTheme=" + theme + "; expires=" + expiryDate.toUTCString() + "; path=/; SameSite=Strict";
+        }
+        
+        function getThemeCookie() {
+            const name = "dlabTheme=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
                 }
-                return "dark"; // Default to dark if no cookie found
+                if (c.indexOf(name) === 0) {
+                    return c.substring(name.length, c.length);
+                }
             }
+            return "dark"; // Default to dark if no cookie found
+        }
+        
+        // 3. Apply theme from cookie on page load
+        function applyTheme() {
+            const savedTheme = getThemeCookie();
+            const body = document.getElementsByTagName('body')[0];
             
-            // 3. Apply theme from cookie on page load
-            function applyTheme() {
-                const savedTheme = getThemeCookie();
-                const body = document.getElementsByTagName('body')[0];
+            if (savedTheme === "light") {
+                body.setAttribute('data-theme-version', 'light');
+                body.classList.remove('dark-theme');
                 
-                if (savedTheme === "light") {
-                    body.setAttribute('data-theme-version', 'light');
-                    body.classList.remove('dark-theme');
-                    
-                    // Find and modify buttons with light class that should be dark in light mode
-                    document.querySelectorAll('.btn-light, .bg-light').forEach(element => {
-                        if (!element.classList.contains('btn-dark') && !element.classList.contains('preserve-light')) {
-                            element.classList.remove('btn-light');
-                            element.classList.add('btn-dark');
-                        }
-                    });
-                } else {
-                    body.setAttribute('data-theme-version', 'dark');
-                    body.classList.add('dark-theme');
-                    
-                    // Restore light buttons in dark mode
-                    document.querySelectorAll('.btn-dark').forEach(element => {
-                        if (!element.classList.contains('preserve-dark')) {
-                            element.classList.remove('btn-dark');
-                            element.classList.add('btn-light');
-                        }
-                    });
-                }
-            }
-            
-            // Apply theme immediately when DOM loads
-            applyTheme();
-            
-            // 4. Override the styleSwitcher's setCookie function
-            if (typeof dlabSettings !== 'undefined') {
-                const originalSetCookie = dlabSettings.prototype.setCookie;
-                dlabSettings.prototype.setCookie = function(cname, cvalue, exdays) {
-                    originalSetCookie.call(this, cname, cvalue, exdays);
-                    
-                    // If this is a theme cookie being set, use our enhanced version
-                    if (cname === 'dlabTheme') {
-                        setThemeCookie(cvalue);
-                        
-                        // Apply theme change immediately
-                        setTimeout(function() {
-                            applyTheme();
-                        }, 100);
+                // Find and modify buttons with light class that should be dark in light mode
+                document.querySelectorAll('.btn-light, .bg-light').forEach(element => {
+                    if (!element.classList.contains('btn-dark') && !element.classList.contains('preserve-light')) {
+                        element.classList.remove('btn-light');
+                        element.classList.add('btn-dark');
                     }
-                };
+                });
+            } else {
+                body.setAttribute('data-theme-version', 'dark');
+                body.classList.add('dark-theme');
+                
+                // Restore light buttons in dark mode
+                document.querySelectorAll('.btn-dark').forEach(element => {
+                    if (!element.classList.contains('preserve-dark')) {
+                        element.classList.remove('btn-dark');
+                        element.classList.add('btn-light');
+                    }
+                });
             }
-            
-            // 5. Make sure theme switcher buttons use our enhanced cookie handling
-            document.querySelectorAll('[data-theme]').forEach(button => {
-                button.addEventListener('click', function() {
-                    const theme = this.getAttribute('data-theme');
-                    setThemeCookie(theme);
+        }
+        
+        // Apply theme immediately when DOM loads
+        applyTheme();
+        
+        // 4. Override the styleSwitcher's setCookie function
+        if (typeof dlabSettings !== 'undefined') {
+            const originalSetCookie = dlabSettings.prototype.setCookie;
+            dlabSettings.prototype.setCookie = function(cname, cvalue, exdays) {
+                originalSetCookie.call(this, cname, cvalue, exdays);
+                
+                // If this is a theme cookie being set, use our enhanced version
+                if (cname === 'dlabTheme') {
+                    setThemeCookie(cvalue);
+                    
+                    // Apply theme change immediately
                     setTimeout(function() {
                         applyTheme();
                     }, 100);
-                });
-            });
-        });
-
-        $(document).ready(function() {
-            $("#select#kegiatan").select2({
-                width: '100%',
-                dropdownParent: $("body")
-            });
-        });
-        jQuery(document).ready(function() {
-            jQuery('#kategori').change(function() {
-                var Id_Kategori = jQuery("select#kategori").val();
-                jQuery.ajax({
-                    type: 'POST',
-                    url: 'get_kegiatan.php',
-                    data: {
-                        Id_Kategori: Id_Kategori
-                    },
-                    success: function(response) {
-                        jQuery('select#kegiatan').html(response);
-                    }
-                });
-            });
-            var kategoriSelected = jQuery('#kategori').val();
-            var kegiatanTerpilih =
-                <?php echo isset($data_sertifikat['Id_Kegiatan']) ? $data_sertifikat['Id_Kegiatan'] : 'null'; ?>;
-            if (kategoriSelected) {
-                jQuery.ajax({
-                    type: "POST",
-                    url: "get_kegiatan.php",
-                    data: {
-                        Id_Kategori: kategoriSelected,
-                        Id_Kegiatan: kegiatanTerpilih
-                    },
-                    success: function(response) {
-                        $('#kegiatan').html(response);
-                    }
-                });
-            }
-        });
-
-
-        jQuery('.hapusdata').click(function(e) {
-            e.preventDefault(); // Mencegah reload halaman
-
-            var id_pengguna = jQuery(this).data('id'); // Ambil ID dari data-id tombol
-
-            (async () => {
-                const {
-                    value: formValues
-                } = await Swal.fire({
-                    title: 'Masukkan password jika ingin menghapus',
-                    html: '<input type="password" class="swal2-input" id="password">',
-                    showCancelButton: true
-                });
-
-                if (formValues) {
-                    var password = jQuery("#password").val(); // Ambil password dari input
-
-                    jQuery.ajax({
-                        url: '../api/delete.php?id_pengguna=' +
-                            id_pengguna, // Gunakan id dari tombol
-                        type: 'POST',
-                        data: {
-                            password: password
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            if (response.status === "success") {
-                                Swal.fire({
-                                    type: 'success',
-                                    title: response.message,
-                                    text: 'Anda akan log out',
-                                }).then(() => {
-                                    window.location.href =
-                                        "../logout.php"; // Redirect setelah swal sukses
-                                });
-                            } else {
-                                Swal.fire({
-                                    type: 'error',
-                                    title: response.message
-                                });
-                            }
-                        },
-                        error: function() {
-                            Swal.fire({
-                                type: 'error',
-                                title: 'Terjadi kesalahan saat menghapus data!'
-                            });
-                        }
-                    });
                 }
-            })();
-        });
-
-        jQuery('.editdata').click(function(e) {
-            e.preventDefault(); // Mencegah reload halaman
-
-            var id_pengguna = jQuery(this).data('id'); // Ambil ID dari data-id tombol
-
-            (async () => {
-                const {
-                    value: formValues
-                } = await Swal.fire({
-                    title: 'Masukkan password untuk verifikasi',
-                    html: '<input type="password" class="swal2-input" id="password">',
-                    showCancelButton: true,
-                });
-
-                if (formValues) {
-                    var password = jQuery("#password").val();
-                    jQuery.ajax({
-                        url: '../api/edit.php?id_pengguna=' +
-                            id_pengguna,
-                        type: 'POST',
-                        data: {
-                            id_pengguna: id_pengguna,
-                            password: password
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            console.log(response); // Debugging
-
-                            if (response.status === "success") {
-                                Swal.fire({
-                                    type: 'success',
-                                    title: response.message,
-                                    text: 'Anda akan diarahkan ke halaman update'
-                                }).then(() => {
-                                    window.location.href =
-                                        "dashboard.php?page=update_user_2&id_pengguna=" +
-                                        id_pengguna;
-                                });
-                            } else {
-                                Swal.fire({
-                                    type: 'error',
-                                    title: response.message
-                                });
-                            }
-                        },
-                        error: function() {
-                            Swal.fire({
-                                type: 'error',
-                                title: 'Terjadi kesalahan saat mengedit data! / Password Salah!'
-                            });
-                        }
-                    });
-                }
-            })();
-        });
-
-        jQuery('.editdatasiswa').click(function(e) {
-            e.preventDefault();
-
-            var id_pengguna = jQuery(this).data('id');
-
-            (async () => {
-                const {
-                    value: formValues
-                } = await Swal.fire({
-                    title: 'Masukkan password untuk verifikasi',
-                    html: '<input type="password" class="swal2-input" id="password">',
-                    showCancelButton: true,
-                });
-
-                if (formValues) {
-                    var password = jQuery("#password").val();
-                    var password_baru = jQuery("#password_baru").val();
-
-                    jQuery.ajax({
-                        url: '../api/edit_2.php?id_pengguna=' +
-                            id_pengguna, // Pastikan edit.php menangani autentikasi
-                        type: 'POST',
-                        data: {
-                            id_pengguna: id_pengguna,
-                            password: password
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            if (response.status === "success") {
-                                jQuery.ajax({
-                                    url: '../api/update_siswa_2.php',
-                                    type: 'POST',
-                                    data: {
-                                        nis: response.nis,
-                                        jurusan: response.jurusan,
-                                        no_absen: response.no_absen,
-                                        nama_siswa: response.nama_siswa,
-                                        no_telp: response.no_telp,
-                                        email: response.email,
-                                        kelas: response.kelas,
-                                        angkatan: response.angkatan,
-                                        password_baru: jQuery("#password_baru").val(),
-                                    },
-                                    dataType: "json",
-                                    success: function(updateResponse) {
-                                        let intervalId = setInterval(function() {
-                                            Swal.fire({
-                                                title: 'Berhasil!',
-                                                text: updateResponse
-                                                    .message,
-                                                type: updateResponse
-                                                    .status,
-                                                timer: 2000,
-                                                showConfirmButton: false,
-                                                backdrop: false
-                                            }).then(() => {
-                                                setTimeout(() => {
-                                                    window
-                                                        .location
-                                                        .href =
-                                                        'dashboard.php?page=sertifikat';
-                                                }, 1000);
-                                            });
-                                            clearInterval(intervalId);
-                                        }, 2000);
-                                    },
-                                    error: function() {
-                                        Swal.fire({
-                                            type: 'error',
-                                            title: 'Gagal memperbarui data!'
-                                        });
-                                    }
-                                });
-                            } else {
-                                Swal.fire({
-                                    type: 'error',
-                                    title: response.message
-                                });
-                            }
-                        },
-                        error: function() {
-                            Swal.fire({
-                                type: 'error',
-                                title: 'Kesalahan saat memverifikasi password!'
-                            });
-                        }
-                    });
-                }
-            })();
-        });
-
-        $(document).ready(function() {
-            $("#angkatan").select2({
-                width: '100%',
-                dropdownParent: $("body")
-            });
-        });
-
-        $(document).ready(function() {
-            $("#status").select2({
-                width: '100%',
-                dropdownParent: $("body")
-            });
-        });
-
-        jQuery(document).ready(function() {
-            // 🔥 Load angkatan saat modal pertama dibuka
-            jQuery("#exampleModalCenter").on("shown.bs.modal", function() {
-                jQuery.get("../api/get_angkatan.php", function(data) {
-                    console.log("Response dari server:", data); // Debugging
-                    jQuery("#angkatan").html(data);
-                });
-            });
-
-            // 🔥 Klik Lanjut untuk modal kedua
-            jQuery("#nextModal").click(function() {
-                var angkatan = jQuery("#angkatan").val();
-                if (!angkatan) {
-                    alert("Pilih angkatan terlebih dahulu!");
-                    return;
-                }
-
-                jQuery("#angkatan_selected").html('<option value="' + angkatan + '">' + angkatan +
-                    '</option>');
-                loadSiswa(angkatan);
-                loadStatus();
-
-                jQuery("#exampleModalCenter").modal('hide');
-                jQuery("#modalFilter").modal('show');
-            });
-
-            // 🔥 Saat user mengganti angkatan di modal kedua
-            jQuery("#angkatan_selected").change(function() {
-                var angkatan = jQuery(this).val();
-                loadSiswa(angkatan);
-            });
-
-            // 🔥 Load daftar siswa berdasarkan angkatan (dengan search select2)
-            function loadSiswa(angkatan) {
-                console.log("Mengambil data siswa untuk angkatan:", angkatan);
-
-                jQuery("#siswa").empty().trigger("change"); // Reset dropdown sebelum memuat data baru
-
-                jQuery("#siswa").select2({
-                    dropdownParent: jQuery("#modalFilter"),
-                    ajax: {
-                        url: "../api/get_siswa.php",
-                        type: "POST",
-                        dataType: "json",
-                        delay: 250,
-                        data: function(params) {
-                            return {
-                                angkatan: angkatan,
-                                search: params.term || "" // Jika kosong, tetap kirim request
-                            };
-                        },
-                        processResults: function(data) {
-                            console.log("Response dari server:", data);
-                            return {
-                                results: data
-                            };
-                        },
-                        cache: true
-                    },
-                    data: [{
-                        id: "all",
-                        text: "Semua"
-                    }], // Opsi langsung terlihat saat klik dropdown
-                    minimumInputLength: 0, // Mengubah dari 1 ke 0 agar muncul saat diklik
-                    placeholder: "-- Pilih Siswa --",
-                    allowClear: true
-                });
-            }
-
-
-
-
-            jQuery("#modalFilter").on("shown.bs.modal", function() {
-                var angkatan = jQuery("#angkatan_selected").val();
-                if (angkatan) {
-                    loadSiswa(angkatan);
-                }
-            });
-
-
-            // 🔥 Load status dari tabel sertifikat
-            function loadStatus() {
-                jQuery.get("../api/get_status.php", function(data) {
-                    jQuery("#status").html(data);
-                });
-            }
-
-            // 🔥 Klik Cetak PDF
-            jQuery("#cetakPDF").click(function() {
-                var angkatan = jQuery("#angkatan_selected").val();
-                var siswa = jQuery("#siswa").val();
-                var status = jQuery("#status").val();
-
-                if (!angkatan || !siswa || !status) {
-                    alert("Semua filter harus dipilih!");
-                    return;
-                }
-
-                // Kirim request ke generate_pdf.php dengan opsi "Semua" jika dipilih
-                window.open("generate_pdf.php?angkatan=" + encodeURIComponent(angkatan) +
-                    "&siswa=" + encodeURIComponent(siswa) +
-                    "&status=" + encodeURIComponent(status),
-                    "_blank");
-            });
-
-            jQuery("#cetak_sertifikat").click(function() {
-                window.open("generate_sertifikat.php");
-            });
-
-        });
-
-        function markAsRead(id, element) {
-            event.preventDefault(); // Mencegah link langsung membuka halaman
-
-            // Kirim AJAX untuk update status ke database
-            fetch('../update/update_notif.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: 'id=' + id
-                }).then(response => response.text())
-                .then(data => {
-                    console.log(data);
-                    element.closest("li").style.opacity = "0.5"; // Buat notifikasi terlihat "redup"
-                    updateNotifCount();
-                });
-
-            // Arahkan ke halaman tujuan setelah 0.5 detik
-            setTimeout(() => {
-                window.location.href = element.href;
-            }, 500);
+            };
         }
-
-        function updateNotifCount() {
-            let badge = document.getElementById("jumlahNotif");
-            let count = parseInt(badge.innerText) || 0; // Pastikan jika teks kosong, dianggap 0
-            count = Math.max(count - 1, 0); // Hindari angka negatif
-            badge.innerText = count > 0 ? count : "0"; // Jika nol, tetap tampilkan "0"
-        }
-
-        const coords = {
-            x: 0,
-            y: 0
-        };
-        const circles = document.querySelectorAll(".circle");
-
-        const colors = [
-            "#ffb56b",
-            "#fdaf69",
-            "#f89d63",
-            "#f59761",
-            "#ef865e",
-            "#ec805d",
-            "#e36e5c",
-            "#df685c",
-            "#d5585c",
-            "#d1525c",
-            "#c5415d",
-            "#c03b5d",
-            "#b22c5e",
-            "#ac265e",
-            "#9c155f",
-            "#950f5f",
-            "#830060",
-            "#7c0060",
-            "#680060",
-            "#60005f",
-            "#48005f",
-            "#3d005e"
-        ];
-
-        circles.forEach(function(circle, index) {
-            circle.x = 0;
-            circle.y = 0;
-            circle.style.backgroundColor = colors[index % colors.length];
-        });
-
-        window.addEventListener("mousemove", function(e) {
-            coords.x = e.clientX;
-            coords.y = e.clientY;
-
-        });
-
-        function animateCircles() {
-
-            let x = coords.x;
-            let y = coords.y;
-
-            circles.forEach(function(circle, index) {
-                circle.style.left = x - 12 + "px";
-                circle.style.top = y - 12 + "px";
-
-                circle.style.scale = (circles.length - index) / circles.length;
-
-                circle.x = x;
-                circle.y = y;
-
-                const nextCircle = circles[index + 1] || circles[0];
-                x += (nextCircle.x - x) * 0.8;
-                y += (nextCircle.y - y) * 0.8;
-            });
-
-            requestAnimationFrame(animateCircles);
-        }
-
-        animateCircles();
-
-        jQuery(window).on('load', function() {
-            setTimeout(function() {
-                cardsCenter();
-            }, 1000);
-        });
         
-        document.querySelector(".profile-button").addEventListener("click", function() {
-            document.querySelector(".profile-dropdown").classList.toggle("active");
+        // 5. Make sure theme switcher buttons use our enhanced cookie handling
+        document.querySelectorAll('[data-theme]').forEach(button => {
+            button.addEventListener('click', function() {
+                const theme = this.getAttribute('data-theme');
+                setThemeCookie(theme);
+                setTimeout(function() {
+                    applyTheme();
+                }, 100);
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $("#select#kegiatan").select2({
+            width: '100%',
+            dropdownParent: $("body")
+        });
+    });
+    jQuery(document).ready(function() {
+        jQuery('#kategori').change(function() {
+            var Id_Kategori = jQuery("select#kategori").val();
+            jQuery.ajax({
+                type: 'POST',
+                url: 'get_kegiatan.php',
+                data: {
+                    Id_Kategori: Id_Kategori
+                },
+                success: function(response) {
+                    jQuery('select#kegiatan').html(response);
+                }
+            });
+        });
+        var kategoriSelected = jQuery('#kategori').val();
+        var kegiatanTerpilih =
+            <?php echo isset($data_sertifikat['Id_Kegiatan']) ? $data_sertifikat['Id_Kegiatan'] : 'null'; ?>;
+        if (kategoriSelected) {
+            jQuery.ajax({
+                type: "POST",
+                url: "get_kegiatan.php",
+                data: {
+                    Id_Kategori: kategoriSelected,
+                    Id_Kegiatan: kegiatanTerpilih
+                },
+                success: function(response) {
+                    $('#kegiatan').html(response);
+                }
+            });
+        }
+    });
+
+
+    jQuery('.hapusdata').click(function(e) {
+        e.preventDefault(); // Mencegah reload halaman
+
+        var id_pengguna = jQuery(this).data('id'); // Ambil ID dari data-id tombol
+
+        (async () => {
+            const {
+                value: formValues
+            } = await Swal.fire({
+                title: 'Masukkan password jika ingin menghapus',
+                html: '<input type="password" class="swal2-input" id="password">',
+                showCancelButton: true
+            });
+
+            if (formValues) {
+                var password = jQuery("#password").val(); // Ambil password dari input
+
+                jQuery.ajax({
+                    url: '../api/delete.php?id_pengguna=' +
+                        id_pengguna, // Gunakan id dari tombol
+                    type: 'POST',
+                    data: {
+                        password: password
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status === "success") {
+                            Swal.fire({
+                                type: 'success',
+                                title: response.message,
+                                text: 'Anda akan log out',
+                            }).then(() => {
+                                window.location.href =
+                                    "../logout.php"; // Redirect setelah swal sukses
+                            });
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: response.message
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Terjadi kesalahan saat menghapus data!'
+                        });
+                    }
+                });
+            }
+        })();
+    });
+
+    jQuery('.editdata').click(function(e) {
+        e.preventDefault(); // Mencegah reload halaman
+
+        var id_pengguna = jQuery(this).data('id'); // Ambil ID dari data-id tombol
+
+        (async () => {
+            const {
+                value: formValues
+            } = await Swal.fire({
+                title: 'Masukkan password untuk verifikasi',
+                html: '<input type="password" class="swal2-input" id="password">',
+                showCancelButton: true,
+            });
+
+            if (formValues) {
+                var password = jQuery("#password").val();
+                jQuery.ajax({
+                    url: '../api/edit.php?id_pengguna=' +
+                        id_pengguna,
+                    type: 'POST',
+                    data: {
+                        id_pengguna: id_pengguna,
+                        password: password
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response); // Debugging
+
+                        if (response.status === "success") {
+                            Swal.fire({
+                                type: 'success',
+                                title: response.message,
+                                text: 'Anda akan diarahkan ke halaman update'
+                            }).then(() => {
+                                window.location.href =
+                                    "dashboard.php?page=update_user_2&id_pengguna=" +
+                                    id_pengguna;
+                            });
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: response.message
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Terjadi kesalahan saat mengedit data! / Password Salah!'
+                        });
+                    }
+                });
+            }
+        })();
+    });
+
+    jQuery('.editdatasiswa').click(function(e) {
+        e.preventDefault();
+
+        var id_pengguna = jQuery(this).data('id');
+
+        (async () => {
+            const {
+                value: formValues
+            } = await Swal.fire({
+                title: 'Masukkan password untuk verifikasi',
+                html: '<input type="password" class="swal2-input" id="password">',
+                showCancelButton: true,
+            });
+
+            if (formValues) {
+                var password = jQuery("#password").val();
+                var password_baru = jQuery("#password_baru").val();
+
+                jQuery.ajax({
+                    url: '../api/edit_2.php?id_pengguna=' +
+                        id_pengguna, // Pastikan edit.php menangani autentikasi
+                    type: 'POST',
+                    data: {
+                        id_pengguna: id_pengguna,
+                        password: password
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status === "success") {
+                            jQuery.ajax({
+                                url: '../api/update_siswa_2.php',
+                                type: 'POST',
+                                data: {
+                                    nis: response.nis,
+                                    jurusan: response.jurusan,
+                                    no_absen: response.no_absen,
+                                    nama_siswa: response.nama_siswa,
+                                    no_telp: response.no_telp,
+                                    email: response.email,
+                                    kelas: response.kelas,
+                                    angkatan: response.angkatan,
+                                    password_baru: jQuery("#password_baru").val(),
+                                },
+                                dataType: "json",
+                                success: function(updateResponse) {
+                                    let intervalId = setInterval(function() {
+                                        Swal.fire({
+                                            title: 'Berhasil!',
+                                            text: updateResponse
+                                                .message,
+                                            type: updateResponse
+                                                .status,
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                            backdrop: false
+                                        }).then(() => {
+                                            setTimeout(() => {
+                                                window
+                                                    .location
+                                                    .href =
+                                                    'dashboard.php?page=sertifikat';
+                                            }, 1000);
+                                        });
+                                        clearInterval(intervalId);
+                                    }, 2000);
+                                },
+                                error: function() {
+                                    Swal.fire({
+                                        type: 'error',
+                                        title: 'Gagal memperbarui data!'
+                                    });
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: response.message
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Kesalahan saat memverifikasi password!'
+                        });
+                    }
+                });
+            }
+        })();
+    });
+
+    $(document).ready(function() {
+        $("#angkatan").select2({
+            width: '100%',
+            dropdownParent: $("body")
+        });
+    });
+
+    $(document).ready(function() {
+        $("#status").select2({
+            width: '100%',
+            dropdownParent: $("body")
+        });
+    });
+
+    jQuery(document).ready(function() {
+        // 🔥 Load angkatan saat modal pertama dibuka
+        jQuery("#exampleModalCenter").on("shown.bs.modal", function() {
+            jQuery.get("../api/get_angkatan.php", function(data) {
+                console.log("Response dari server:", data); // Debugging
+                jQuery("#angkatan").html(data);
+            });
         });
 
-        // Klik di luar dropdown untuk menutupnya
-        document.addEventListener("click", function(e) {
-            let dropdown = document.querySelector(".profile-dropdown");
-            if (!dropdown.contains(e.target)) {
-                dropdown.classList.remove("active");
+        // 🔥 Klik Lanjut untuk modal kedua
+        jQuery("#nextModal").click(function() {
+            var angkatan = jQuery("#angkatan").val();
+            if (!angkatan) {
+                alert("Pilih angkatan terlebih dahulu!");
+                return;
+            }
+
+            jQuery("#angkatan_selected").html('<option value="' + angkatan + '">' + angkatan +
+                '</option>');
+            loadSiswa(angkatan);
+            loadStatus();
+
+            jQuery("#exampleModalCenter").modal('hide');
+            jQuery("#modalFilter").modal('show');
+        });
+
+        // 🔥 Saat user mengganti angkatan di modal kedua
+        jQuery("#angkatan_selected").change(function() {
+            var angkatan = jQuery(this).val();
+            loadSiswa(angkatan);
+        });
+
+        // 🔥 Load daftar siswa berdasarkan angkatan (dengan search select2)
+        function loadSiswa(angkatan) {
+            console.log("Mengambil data siswa untuk angkatan:", angkatan);
+
+            jQuery("#siswa").empty().trigger("change"); // Reset dropdown sebelum memuat data baru
+
+            jQuery("#siswa").select2({
+                dropdownParent: jQuery("#modalFilter"),
+                ajax: {
+                    url: "../api/get_siswa.php",
+                    type: "POST",
+                    dataType: "json",
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            angkatan: angkatan,
+                            search: params.term || "" // Jika kosong, tetap kirim request
+                        };
+                    },
+                    processResults: function(data) {
+                        console.log("Response dari server:", data);
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                data: [{
+                    id: "all",
+                    text: "Semua"
+                }], // Opsi langsung terlihat saat klik dropdown
+                minimumInputLength: 0, // Mengubah dari 1 ke 0 agar muncul saat diklik
+                placeholder: "-- Pilih Siswa --",
+                allowClear: true
+            });
+        }
+
+
+
+
+        jQuery("#modalFilter").on("shown.bs.modal", function() {
+            var angkatan = jQuery("#angkatan_selected").val();
+            if (angkatan) {
+                loadSiswa(angkatan);
             }
         });
 
-        function deleteAllNotifications(nis) {
-            Swal.fire({
-                title: 'Konfirmasi',
-                text: 'Apakah Anda yakin ingin menghapus semua notifikasi?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus semua!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.value) {
-                    // Tambahkan loading state
-                    Swal.fire({
-                        title: 'Memproses...',
-                        text: 'Menghapus semua notifikasi',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
 
-                    // Kirim permintaan AJAX untuk menghapus semua notifikasi
-                    $.ajax({
-                        url: '../api/delete_all_notifications.php',
-                        type: 'POST',
-                        data: {
-                            nis: nis
-                        },
-                        success: function(response) {
-                            // Parse respons JSON
-                            let result;
-                            try {
-                                result = JSON.parse(response);
-                            } catch (e) {
-                                console.error("Error parsing JSON:", e);
-                                Swal.fire({
-                                    type: 'error',
-                                    title: 'Terjadi Kesalahan',
-                                    text: 'Gagal memproses respons server'
-                                });
-                                return;
-                            }
+        // 🔥 Load status dari tabel sertifikat
+        function loadStatus() {
+            jQuery.get("../api/get_status.php", function(data) {
+                jQuery("#status").html(data);
+            });
+        }
 
-                            if (result.success) {
-                                // Refresh komponen notifikasi
-                                $('#DZ_W_Notification1 ul').html(
-                                    '<li><p class="text-center">Tidak ada notifikasi baru</p></li>'
-                                );
-                                $('#jumlahNotif').text('0');
+        // 🔥 Klik Cetak PDF
+        jQuery("#cetakPDF").click(function() {
+            var angkatan = jQuery("#angkatan_selected").val();
+            var siswa = jQuery("#siswa").val();
+            var status = jQuery("#status").val();
 
-                                // Tampilkan pesan sukses dengan SweetAlert
-                                Swal.fire({
-                                    type: 'success',
-                                    title: 'Berhasil',
-                                    text: 'Semua notifikasi berhasil dihapus!'
-                                });
-                            } else {
-                                // Tampilkan pesan error dengan SweetAlert
-                                Swal.fire({
-                                    type: 'error',
-                                    title: 'Gagal',
-                                    text: 'Gagal menghapus notifikasi: ' + result
-                                        .message
-                                });
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("AJAX Error:", xhr, status, error);
-                            // Tampilkan pesan error dengan SweetAlert
+            if (!angkatan || !siswa || !status) {
+                alert("Semua filter harus dipilih!");
+                return;
+            }
+
+            // Kirim request ke generate_pdf.php dengan opsi "Semua" jika dipilih
+            window.open("generate_pdf.php?angkatan=" + encodeURIComponent(angkatan) +
+                "&siswa=" + encodeURIComponent(siswa) +
+                "&status=" + encodeURIComponent(status),
+                "_blank");
+        });
+
+        jQuery("#cetak_sertifikat").click(function() {
+            window.open("generate_sertifikat.php");
+        });
+
+    });
+
+    function markAsRead(id, element) {
+        event.preventDefault(); // Mencegah link langsung membuka halaman
+
+        // Kirim AJAX untuk update status ke database
+        fetch('../update/update_notif.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'id=' + id
+            }).then(response => response.text())
+            .then(data => {
+                console.log(data);
+                element.closest("li").style.opacity = "0.5"; // Buat notifikasi terlihat "redup"
+                updateNotifCount();
+            });
+
+        // Arahkan ke halaman tujuan setelah 0.5 detik
+        setTimeout(() => {
+            window.location.href = element.href;
+        }, 500);
+    }
+
+    function updateNotifCount() {
+        let badge = document.getElementById("jumlahNotif");
+        let count = parseInt(badge.innerText) || 0; // Pastikan jika teks kosong, dianggap 0
+        count = Math.max(count - 1, 0); // Hindari angka negatif
+        badge.innerText = count > 0 ? count : "0"; // Jika nol, tetap tampilkan "0"
+    }
+    
+    document.querySelector(".profile-button").addEventListener("click", function() {
+        document.querySelector(".profile-dropdown").classList.toggle("active");
+    });
+
+    // Klik di luar dropdown untuk menutupnya
+    document.addEventListener("click", function(e) {
+        let dropdown = document.querySelector(".profile-dropdown");
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("active");
+        }
+    });
+
+    function deleteAllNotifications(nis) {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Apakah Anda yakin ingin menghapus semua notifikasi?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus semua!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.value) {
+                // Tambahkan loading state
+                Swal.fire({
+                    title: 'Memproses...',
+                    text: 'Menghapus semua notifikasi',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                // Kirim permintaan AJAX untuk menghapus semua notifikasi
+                $.ajax({
+                    url: '../api/delete_all_notifications.php',
+                    type: 'POST',
+                    data: {
+                        nis: nis
+                    },
+                    success: function(response) {
+                        // Parse respons JSON
+                        let result;
+                        try {
+                            result = JSON.parse(response);
+                        } catch (e) {
+                            console.error("Error parsing JSON:", e);
                             Swal.fire({
                                 type: 'error',
                                 title: 'Terjadi Kesalahan',
-                                text: 'Terjadi kesalahan saat menghapus notifikasi'
+                                text: 'Gagal memproses respons server'
+                            });
+                            return;
+                        }
+
+                        if (result.success) {
+                            // Refresh komponen notifikasi
+                            $('#DZ_W_Notification1 ul').html(
+                                '<li><p class="text-center">Tidak ada notifikasi baru</p></li>'
+                            );
+                            $('#jumlahNotif').text('0');
+
+                            // Tampilkan pesan sukses dengan SweetAlert
+                            Swal.fire({
+                                type: 'success',
+                                title: 'Berhasil',
+                                text: 'Semua notifikasi berhasil dihapus!'
+                            });
+                        } else {
+                            // Tampilkan pesan error dengan SweetAlert
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Gagal',
+                                text: 'Gagal menghapus notifikasi: ' + result
+                                    .message
                             });
                         }
-                    });
-                }
-            });
-        }
-        </script>
-
-        <?php
-
-        $queryApproved = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM sertifikat WHERE Status='Approved'");
-        $queryPending = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM sertifikat WHERE Status='Pending'");
-        $queryDeclined = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM sertifikat WHERE Status='Declined'");
-
-        // Data dalam format JSON
-        $dataChart = json_encode([
-            'approved' => mysqli_fetch_assoc($queryApproved)['total'],
-            'pending' => mysqli_fetch_assoc($queryPending)['total'],
-            'declined' => mysqli_fetch_assoc($queryDeclined)['total']
-        ]);
-        ?>
-
-
-
-    </body>
-
-    </html>
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error:", xhr, status, error);
+                        // Tampilkan pesan error dengan SweetAlert
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Terjadi Kesalahan',
+                            text: 'Terjadi kesalahan saat menghapus notifikasi'
+                        });
+                    }
+                });
+            }
+        });
+    }
+    </script>
 
     <?php
-    }
+
+    $queryApproved = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM sertifikat WHERE Status='Approved'");
+    $queryPending = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM sertifikat WHERE Status='Pending'");
+    $queryDeclined = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM sertifikat WHERE Status='Declined'");
+
+    // Data dalam format JSON
+    $dataChart = json_encode([
+        'approved' => mysqli_fetch_assoc($queryApproved)['total'],
+        'pending' => mysqli_fetch_assoc($queryPending)['total'],
+        'declined' => mysqli_fetch_assoc($queryDeclined)['total']
+    ]);
     ?>
+
+
+
+</body>
+
+</html>
+
+<?php
+}
+?>

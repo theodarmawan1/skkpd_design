@@ -149,7 +149,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div id="emailchart"> </div>
+                                        <div id="donutchart"> </div>
                                         <div class="mb-3 mt-4">
                                             <h4 class="fs-18 font-w600">Legend</h4>
                                         </div>

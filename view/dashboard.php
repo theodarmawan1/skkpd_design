@@ -43,15 +43,11 @@ if (isset($_COOKIE["nis"])) {
     <meta name="description" content="Theo : Dashboard SKKPd">
     <meta property="og:title" content="Theo : Dashboard SKKPd">
     <meta property="og:description" content="Theo : Dashboard SKKPd">
-    <meta property=" og:image" content="https://fillow.dexignlab.com/xhtml/social-image.png">
     <meta name="format-detection" content="telephone=no">
 
     <!-- PAGE TITLE HERE -->
     <title>SKKPd Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-    <!-- <script src="../js/plugins-init/sweetalert.init.js"></script> -->
-
     <link href="../vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="../vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../vendor/select2/css/select2.min.css" rel="stylesheet" />
@@ -597,115 +593,13 @@ if (isset($_COOKIE["nis"])) {
 
     <script>
 
-    jQuery(document).ready(function() {
-        setTimeout(function() {
-            dlabSettingsOptions.version = 'dark';
-            new dlabSettings(dlabSettingsOptions);
-        }, 100); // Kurangi delay agar lebih cepat
-    });
-
-    // This script handles theme setting, preloader styling, and proper class handling
-    // Place this at the end of your HTML body, right before closing </body> tag
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // 1. Fix preloader background color to match current theme
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-            preloader.style.backgroundColor = '#1e1e1e'; // Dark background for preloader
-        }
-        
-        // 2. Proper theme cookie handling
-        function setThemeCookie(theme) {
-            const expiryDate = new Date();
-            expiryDate.setMonth(expiryDate.getMonth() + 6); // Cookie expires in 6 months
-            document.cookie = "dlabTheme=" + theme + "; expires=" + expiryDate.toUTCString() + "; path=/; SameSite=Strict";
-        }
-        
-        function getThemeCookie() {
-            const name = "dlabTheme=";
-            const decodedCookie = decodeURIComponent(document.cookie);
-            const ca = decodedCookie.split(';');
-            for(let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) === 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "dark"; // Default to dark if no cookie found
-        }
-        
-        // 3. Apply theme from cookie on page load
-        function applyTheme() {
-            const savedTheme = getThemeCookie();
-            const body = document.getElementsByTagName('body')[0];
-            
-            if (savedTheme === "light") {
-                body.setAttribute('data-theme-version', 'light');
-                body.classList.remove('dark-theme');
-                
-                // Find and modify buttons with light class that should be dark in light mode
-                document.querySelectorAll('.btn-light, .bg-light').forEach(element => {
-                    if (!element.classList.contains('btn-dark') && !element.classList.contains('preserve-light')) {
-                        element.classList.remove('btn-light');
-                        element.classList.add('btn-dark');
-                    }
-                });
-            } else {
-                body.setAttribute('data-theme-version', 'dark');
-                body.classList.add('dark-theme');
-                
-                // Restore light buttons in dark mode
-                document.querySelectorAll('.btn-dark').forEach(element => {
-                    if (!element.classList.contains('preserve-dark')) {
-                        element.classList.remove('btn-dark');
-                        element.classList.add('btn-light');
-                    }
-                });
-            }
-        }
-        
-        // Apply theme immediately when DOM loads
-        applyTheme();
-        
-        // 4. Override the styleSwitcher's setCookie function
-        if (typeof dlabSettings !== 'undefined') {
-            const originalSetCookie = dlabSettings.prototype.setCookie;
-            dlabSettings.prototype.setCookie = function(cname, cvalue, exdays) {
-                originalSetCookie.call(this, cname, cvalue, exdays);
-                
-                // If this is a theme cookie being set, use our enhanced version
-                if (cname === 'dlabTheme') {
-                    setThemeCookie(cvalue);
-                    
-                    // Apply theme change immediately
-                    setTimeout(function() {
-                        applyTheme();
-                    }, 100);
-                }
-            };
-        }
-        
-        // 5. Make sure theme switcher buttons use our enhanced cookie handling
-        document.querySelectorAll('[data-theme]').forEach(button => {
-            button.addEventListener('click', function() {
-                const theme = this.getAttribute('data-theme');
-                setThemeCookie(theme);
-                setTimeout(function() {
-                    applyTheme();
-                }, 100);
-            });
-        });
-    });
-
     $(document).ready(function() {
         $("#select#kegiatan").select2({
             width: '100%',
             dropdownParent: $("body")
         });
     });
+
     jQuery(document).ready(function() {
         jQuery('#kategori').change(function() {
             var Id_Kategori = jQuery("select#kategori").val();

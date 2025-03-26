@@ -27,11 +27,11 @@ if (isset($_POST['tombol_login'])) {
             // Tentukan URL untuk redirect setelah login sukses
             $redirect_url = 'view/dashboard.php?page=sertifikat';
         } else {
-            $message = 'Password Tidak Ditemukan';
+            $message = 'Password Tidak Ditemukan / Username Tidak Boleh Kosong';
             $redirect_url = 'login.php'; // Tetap di halaman login
         }
     } else {
-        $message = 'Username Tidak Ditemukan';
+        $message = 'Username Tidak Ditemukan / Password Tidak Boleh Kosong';
         $redirect_url = 'login.php'; // Tetap di halaman login
     }
 }
@@ -48,17 +48,15 @@ ob_end_flush();
     <meta name="author" content="">
     <meta name="robots" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-    <meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-    <meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-    <meta property="og:image" content="https://fillow.dexignlab.com/xhtml/social-image.png">
+    <meta name="description" content="Theo : Dashboard SKKPd">
+    <meta property="og:title" content="Theo : Dashboard SKKPd">
+    <meta property="og:description" content="Theo : Dashboard SKKPd">
     <meta name="format-detection" content="telephone=no">
 
     <!-- PAGE TITLE HERE -->
     <title>Admin Dashboard</title>
-
+    <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
     <link href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
     <link href="css/style.css" rel="stylesheet">
@@ -147,10 +145,6 @@ body {
     ***********************************-->
     <!-- Required vendors -->
     <script src="vendor/global/global.min.js"></script>
-    <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="js/plugins-init/sweetalert.init.js"></script>
-
-    <script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
     <script>
     setTimeout(function() {
         <?php if (isset($message)) { ?>
@@ -172,12 +166,6 @@ body {
         setTimeout(function() {
             cardsCenter();
         }, 1000);
-    });
-    jQuery(document).ready(function() {
-        setTimeout(function() {
-            dlabSettingsOptions.version = 'dark';
-            new dlabSettings(dlabSettingsOptions);
-        }, 900)
     });
     const eyeIcons = {
         open: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="eye-icon"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" /></svg>',
@@ -216,7 +204,6 @@ body {
     <script src="js/custom.min.js"></script>
 
     <script src="js/dlabnav-init.js"></script>
-    <script src="js/styleSwitcher.js"></script>
 </body>
 
 </html>

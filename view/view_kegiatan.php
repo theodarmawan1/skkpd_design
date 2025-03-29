@@ -123,10 +123,20 @@ if(isset($_GET['keyword']) && !empty($_GET['keyword'])) {
                                                 class="btn btn-primary shadow btn-xs sharp me-1">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a onclick="confirmDelete(<?= $baris['Id_Kegiatan'] ?>)"
+                                            <?php
+                                                $id = $baris['Id_Kegiatan'];
+                                                $cek = mysqli_query($koneksi, "SELECT Id_Kegiatan FROM sertifikat  WHERE Id_Kegiatan = '$id'");
+                                                if(mysqli_num_rows($cek) > 0){
+                                                    echo "";
+                                                }else {
+                                            ?>
+                                                <a onclick="confirmDelete(<?= $baris['Id_Kegiatan'] ?>)"
                                                 class="btn btn-danger shadow btn-xs sharp">
                                                 <i class="fa fa-trash"></i>
-                                            </a>
+                                                </a>
+                                            <?php
+                                                }
+                                            ?>
                                         </div>
                                     </td>
                                 </tr>

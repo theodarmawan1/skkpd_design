@@ -47,6 +47,7 @@ if (isset($_COOKIE["nis"])) {
 
     <!-- PAGE TITLE HERE -->
     <title>SKKPd Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vendor/sweetalert2/dist/sweetalert2.min.js"></script>
     <link href="../vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="../vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
@@ -56,7 +57,7 @@ if (isset($_COOKIE["nis"])) {
     <!-- Datatable -->
     <link href="../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Custom Stylesheet -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/cleaned.css" rel="stylesheet">
 
 </head>
 
@@ -141,11 +142,11 @@ if (isset($_COOKIE["nis"])) {
                                     <?php
                                     $nis = $_COOKIE['nis'] ?? NULL;
                                     if ($nis == NULL) {
-                                        $query = mysqli_query($koneksi, "SELECT COUNT(*) AS jumlah, notifikasi.Status, notifikasi.NIS FROM notifikasi WHERE notifikasi.Status = 'Unread'");
+                                        $query = mysqli_query($koneksi, "SELECT COUNT(*) AS jumlah, notifikasi.Status, notifikasi.NIS FROM notifikasi WHERE notifikasi.Status = 'Unread' AND isTambah = 1");
                                         $notif = mysqli_fetch_assoc($query);
                                     }
                                     else{
-                                        $query = mysqli_query($koneksi, "SELECT COUNT(*) AS jumlah, notifikasi.Status, sertifikat.NIS  FROM notifikasi JOIN sertifikat USING(Id_Sertifikat) WHERE notifikasi.Status = 'Unread' AND sertifikat.NIS = '$nis'");
+                                        $query = mysqli_query($koneksi, "SELECT COUNT(*) AS jumlah, notifikasi.Status, sertifikat.NIS  FROM notifikasi JOIN sertifikat USING(Id_Sertifikat) WHERE notifikasi.Status = 'Unread' AND sertifikat.NIS = '$nis' AND isTambah = 0");
                                         $notif = mysqli_fetch_assoc($query);
                                     }
                                     $jumlah_notif = $notif['jumlah'];
@@ -162,7 +163,7 @@ if (isset($_COOKIE["nis"])) {
                                         "SELECT *, notifikasi.Status AS notif_status, sertifikat.NIS
                                         FROM notifikasi 
                                         JOIN sertifikat USING(Id_Sertifikat)
-                                        WHERE sertifikat.NIS = '$cek_nis'
+                                        WHERE sertifikat.NIS = '$cek_nis' AND isTambah = 0
                                         GROUP BY Id_Notifikasi
                                         ORDER BY 
                                             (CASE 
@@ -177,8 +178,8 @@ if (isset($_COOKIE["nis"])) {
                                 <div class="dropdown-menu dropdown-menu-end" style="
                                         box-shadow: 0px -3px 40px -12px red;
                                     ">
-                                    <div id="DZ_W_Notification1" class="widget-media dlab-scroll p-3"
-                                        style="height:380px;">
+                                    <div id="notification_dropdown" class="widget-media dlab-scroll p-3"
+                                        style="height:380px;overflow-y:auto;">
                                         <div
                                             class="d-flex justify-content-between align-items-center p-3 pt-0 mb-3 border-bottom">
                                             <h5 class="m-0">Notifikasi</h5>
@@ -238,7 +239,8 @@ if (isset($_COOKIE["nis"])) {
                             }
                             $query = mysqli_query($koneksi, 
                             "SELECT *, notifikasi.Status AS notif_status 
-                            FROM notifikasi 
+                            FROM notifikasi
+                            WHERE isTambah = 1
                             GROUP BY Id_Notifikasi
                             ORDER BY 
                                 (CASE 
@@ -252,7 +254,7 @@ if (isset($_COOKIE["nis"])) {
                             <div class="dropdown-menu dropdown-menu-end" style="
                                         box-shadow: 0px -3px 40px -12px red;
                                     ">
-                                <div id="DZ_W_Notification1" class="widget-media dlab-scroll p-3" style="height:380px;">
+                                <div id="notification_dropdown" class="widget-media dlab-scroll p-3" style="height:380px;overflow-y:auto;">
                                     <ul class="timeline">
                                         <div
                                             class="d-flex justify-content-between align-items-center p-3 pt-0 mb-3 border-bottom">
@@ -571,7 +573,7 @@ if (isset($_COOKIE["nis"])) {
     ***********************************-->
 
     <!-- Required vendors -->
-    <script src="../vendor/global/global.min.js"></script>
+    <script src="../js/theme_settings.js"></script>
 
     <!-- Apex Chart -->
     <script src="../vendor/apexchart/apexchart.js"></script>
@@ -588,7 +590,6 @@ if (isset($_COOKIE["nis"])) {
     <!-- Dashboard 1 -->
     <script src="../js/dashboard/dashboard-1.js"></script>
     <script src="../js/custom.min.js"></script>
-    <script src="../js/dlabnav-init.js"></script>
 
 
     <script>
@@ -601,36 +602,38 @@ if (isset($_COOKIE["nis"])) {
     });
 
     jQuery(document).ready(function() {
-        jQuery('#kategori').change(function() {
-            var Id_Kategori = jQuery("select#kategori").val();
+        function updateKegiatan(Id_Kategori, Id_Kegiatan = null) {
             jQuery.ajax({
                 type: 'POST',
-                url: 'get_kegiatan.php',
+                url: '../api/get_kegiatan.php',
                 data: {
-                    Id_Kategori: Id_Kategori
+                    Id_Kategori: Id_Kategori,
+                    Id_Kegiatan: Id_Kegiatan
                 },
                 success: function(response) {
-                    jQuery('select#kegiatan').html(response);
-                }
-            });
-        });
-        var kategoriSelected = jQuery('#kategori').val();
-        var kegiatanTerpilih =
-            <?php echo isset($data_sertifikat['Id_Kegiatan']) ? $data_sertifikat['Id_Kegiatan'] : 'null'; ?>;
-        if (kategoriSelected) {
-            jQuery.ajax({
-                type: "POST",
-                url: "get_kegiatan.php",
-                data: {
-                    Id_Kategori: kategoriSelected,
-                    Id_Kegiatan: kegiatanTerpilih
-                },
-                success: function(response) {
-                    $('#kegiatan').html(response);
+                    var $kegiatan = jQuery('select#kegiatan');
+                    $kegiatan.html(response); // Mengisi ulang opsi kegiatan
+                    $kegiatan.niceSelect('update'); // Memperbarui tampilan Nice Select
                 }
             });
         }
+
+        // Event saat kategori berubah
+        jQuery('#kategori').change(function() {
+            var Id_Kategori = jQuery(this).val();
+            updateKegiatan(Id_Kategori);
+        });
+
+        // Cek apakah ada kategori yang sudah dipilih saat halaman pertama kali dimuat
+        var kategoriSelected = jQuery('#kategori').val();
+        var kegiatanTerpilih =
+            <?php echo isset($data_sertifikat['Id_Kegiatan']) ? json_encode($data_sertifikat['Id_Kegiatan']) : 'null'; ?>;
+        
+        if (kategoriSelected) {
+            updateKegiatan(kategoriSelected, kegiatanTerpilih);
+        }
     });
+
 
 
     jQuery('.hapusdata').click(function(e) {
@@ -1046,7 +1049,7 @@ if (isset($_COOKIE["nis"])) {
 
                         if (result.success) {
                             // Refresh komponen notifikasi
-                            $('#DZ_W_Notification1 ul').html(
+                            $('#notification_dropdown ul').html(
                                 '<li><p class="text-center">Tidak ada notifikasi baru</p></li>'
                             );
                             $('#jumlahNotif').text('0');

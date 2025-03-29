@@ -8,18 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nis = isset($_POST['nis']) ? $_POST['nis'] : NULL;
     
     if ($nis === NULL || trim($nis) === "") {
-        // Hapus semua notifikasi jika NIS tidak dikirim
-        $query = "DELETE FROM notifikasi";
-        $stmt = mysqli_prepare($koneksi, $query);
+        // Jika admin, hapus notifikasi dengan isTambah = 1
+        $query = "DELETE FROM notifikasi WHERE isTambah = 1";
     } else {
-        // Hapus notifikasi berdasarkan NIS dengan prepared statement
-        $query = "DELETE FROM notifikasi WHERE Id_Sertifikat IN (SELECT Id_Sertifikat FROM sertifikat WHERE NIS = ?)";
-        $stmt = mysqli_prepare($koneksi, $query);
-        mysqli_stmt_bind_param($stmt, "s", $nis);
+        // Jika siswa, hapus notifikasi berdasarkan NIS dan isTambah = 0
+        $query = "DELETE FROM notifikasi WHERE Id_Sertifikat IN (
+                      SELECT Id_Sertifikat FROM sertifikat WHERE NIS = '$nis'
+                  ) AND isTambah = 0";
     }
 
-    // Eksekusi query
-    if (mysqli_stmt_execute($stmt)) {
+    // Jalankan query
+    $hasil = mysqli_query($koneksi, $query);
+
+    if ($hasil) {
         echo json_encode([
             'success' => true,
             'message' => 'Notifikasi berhasil dihapus'
@@ -31,8 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
     }
 
-    // Tutup statement dan koneksi
-    mysqli_stmt_close($stmt);
+    // Tutup koneksi
     mysqli_close($koneksi);
 } else {
     // Jika bukan request POST

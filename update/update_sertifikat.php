@@ -10,7 +10,7 @@ if (isset($_POST['update-approved'])) {
     $update = mysqli_query($koneksi, "UPDATE sertifikat SET Status='$status', Tanggal_Status_Berubah='$tanggal_status_berubah' WHERE Id_Sertifikat='$id_sertifikat'");
     
     $pesan = "Sertifikat-mu baru saja diubah oleh Admin menjadi $status";
-    mysqli_query($koneksi, "INSERT INTO notifikasi (NIS, Pesan, Status, Id_Sertifikat) VALUES ('{$data_sertifikat['NIS']}', '$pesan', 'Unread', '$id_sertifikat')");
+    mysqli_query($koneksi, "INSERT INTO notifikasi (NIS, Pesan, Status, Id_Sertifikat, isTambah) VALUES ('{$data_sertifikat['NIS']}', '$pesan', 'Unread', '$id_sertifikat', 0)");
     
     if ($update) {
         echo "<script>
@@ -41,7 +41,7 @@ if (isset($_POST['update-canceled'])) {
     $update = mysqli_query($koneksi, "UPDATE sertifikat SET Status='$status', Catatan='$catatan', Tanggal_Status_Berubah='$tanggal_status_berubah' WHERE Id_Sertifikat='$id_sertifikat'");
     
     $pesan = "Sertifikat-mu baru saja diubah oleh Admin menjadi $status";
-    mysqli_query($koneksi, "INSERT INTO notifikasi (NIS, Pesan, Status, Id_Sertifikat) VALUES ('{$data_sertifikat['NIS']}', '$pesan', 'Unread', '$id_sertifikat')");
+    mysqli_query($koneksi, "INSERT INTO notifikasi (NIS, Pesan, Status, Id_Sertifikat, isTambah) VALUES ('{$data_sertifikat['NIS']}', '$pesan', 'Unread', '$id_sertifikat', 0)");
     
     if ($update) {
         echo "<script>

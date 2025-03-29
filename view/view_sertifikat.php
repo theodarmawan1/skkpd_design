@@ -2,9 +2,10 @@
 
 if (isset($_GET['id_sertifikat']) && isset($_GET['confirm_delete']) && $_GET['confirm_delete'] == 'true') {
     $id = mysqli_real_escape_string($koneksi, $_GET['id_sertifikat']);
-    $hasil = mysqli_query($koneksi, "DELETE FROM sertifikat WHERE Id_Sertifikat = '$id'");
+    $hasil_1 = mysqli_query($koneksi, "DELETE FROM notifikasi WHERE Id_Sertifikat = '$id'");
+    $hasil_2 = mysqli_query($koneksi, "DELETE FROM sertifikat WHERE Id_Sertifikat = '$id'");
 
-    if ($hasil) {
+    if ($hasil_1 && $hasil_2) {
         echo "<script>
         let intervalId = setInterval(function() {
             Swal.fire({
@@ -199,10 +200,10 @@ $result = mysqli_query($koneksi, $sql);
                                 ?>
                             <div>
 
-                                <div class="card_number">30 / 30</div>
+                                <div class="card_number"><?=$skor?> / 30</div>
                                 <div class="card_name">Poin Terkumpul</div>
                                 <?php
-                                if($skor < 30){
+                                if($skor >= 30){
                                 ?>
                                 <div class="d-flex justify-content-center mt-3">
                                     <button type="button" class="btn light btn-warning" id="cetak_sertifikat">Cetak
@@ -543,17 +544,22 @@ $result = mysqli_query($koneksi, $sql);
                                         <div class="d-flex align-items-end">
                                             <?php
                                             $cek_nis = $_COOKIE['nis'] ?? NULL;
-                                            if($cek_nis == NULL){ 
-                                            if ($data['Status'] !== 'Approved' && $data['Status'] !== 'Canceled'): ?>
+                                            
+                                            // For admin only: show edit button for non-Approved, non-Canceled certificates
+                                            if($cek_nis == NULL && $data['Status'] !== 'Approved' && $data['Status'] !== 'Canceled'): ?>
                                                 <a href="dashboard.php?page=update_sertifikat&id_sertifikat=<?= $data['Id_Sertifikat'] ?>"
                                                     class="btn btn-primary shadow sharp me-1">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                            <?php endif; }?>
-                                            <a onclick="confirmDelete(<?= $data['Id_Sertifikat'] ?>)"
-                                                class="btn btn-danger shadow sharp">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
+                                            <?php endif; 
+                                            
+                                            // For both admin and student: show delete button only if status is not Approved
+                                            if($data['Status'] !== 'Approved'): ?>
+                                                <a onclick="confirmDelete(<?= $data['Id_Sertifikat'] ?>)"
+                                                    class="btn btn-danger shadow sharp">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

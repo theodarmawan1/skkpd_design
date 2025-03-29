@@ -8,6 +8,24 @@ if (isset($_POST['tambah'])) {
     $tanggal_status_berubah = $_POST['tanggal_status_berubah'] ?? date('Y-m-d');
     $id_kegiatan            = $_POST['kegiatan'];
     
+    if ($id_kegiatan === '') {
+        echo "<script>
+        let intervalId = setInterval(function() {
+        Swal.fire({
+            title: 'Gagal!',
+            text: 'Data Tidak Boleh Kosong!',
+            type: 'error',
+            timer: 2000,
+            showConfirmButton: false
+        }).then(() => {
+            setTimeout(() => {
+                window.location.href = 'dashboard.php?page=tambah_sertifikat';
+            }, 500);
+        });
+        clearInterval(intervalId);
+        }, 2000);
+        </script>";
+    }
     
     function generateCertificateName($nis) {
         $randomString = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789"), 0, 6);
@@ -32,52 +50,90 @@ if (isset($_POST['tambah'])) {
                 
                 if($nis == NULL){
                     $hasil = mysqli_query($koneksi, "INSERT INTO sertifikat (Id_Sertifikat, Tanggal_Upload, Catatan, Sertifikat, Status, Tanggal_Status_Berubah, NIS, Id_Kegiatan) VALUES(NULL, '$tanggal_upload', '$catatan', '$sertifikat', '$status', '$tanggal_status_berubah', NULL, '$id_kegiatan')");
-                }else{
-                    $hasil = mysqli_query($koneksi, "INSERT INTO sertifikat (Id_Sertifikat, Tanggal_Upload, Catatan, Sertifikat, Status, Tanggal_Status_Berubah, NIS, Id_Kegiatan) VALUES(NULL, '$tanggal_upload', '$catatan', '$sertifikat', '$status', '$tanggal_status_berubah', '$nis', '$id_kegiatan')");
-                    $pesan_notifikasi = "Terdapat sertifikat yang baru saja ditambahkan!";
-                    $hasil_notif = mysqli_query($koneksi, "INSERT INTO notifikasi (NIS, Pesan, Status, Id_Sertifikat) VALUES ('$nis', '$pesan_notifikasi', 'Unread', NULL)");
-                }
-                
-                if (!$hasil && !$hasil_notif) {
-                    echo "<script>
-                let intervalId = setInterval(function() {
-                Swal.fire({
-                    title: 'Gagal!',
-                    text: 'Data gagal ditambahkan.',
-                    type: 'error',
-                    timer: 2000,
-                    showConfirmButton: false,
-                    backdrop: false
-                }).then(() => {
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.php?page=tambah_sertifikat';
-                    }, 1000);
-                });
-                    clearInterval(intervalId);
-                }, 2000);
-                </script>";
-                } else {
-                    echo "<script>
+                    if (!$hasil) {
+                        echo "<script>
                     let intervalId = setInterval(function() {
                     Swal.fire({
-                        title: 'Berhasil!',
-                        text: 'Data telah ditambahkan.',
-                        type: 'success',
+                        title: 'Gagal!',
+                        text: 'Data gagal ditambahkan.',
+                        type: 'error',
                         timer: 2000,
                         showConfirmButton: false,
                         backdrop: false
                     }).then(() => {
                         setTimeout(() => {
-                            window.location.href = 'dashboard.php?page=sertifikat';
+                            window.location.href = 'dashboard.php?page=tambah_sertifikat';
                         }, 1000);
                     });
                         clearInterval(intervalId);
                     }, 2000);
                     </script>";
+                    } else {
+                        echo "<script>
+                        let intervalId = setInterval(function() {
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: 'Data telah ditambahkan.',
+                            type: 'success',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            backdrop: false
+                        }).then(() => {
+                            setTimeout(() => {
+                                window.location.href = 'dashboard.php?page=sertifikat';
+                            }, 1000);
+                        });
+                            clearInterval(intervalId);
+                        }, 2000);
+                        </script>";
+                    }
+                }else{
+                    $hasil = mysqli_query($koneksi, "INSERT INTO sertifikat (Id_Sertifikat, Tanggal_Upload, Catatan, Sertifikat, Status, Tanggal_Status_Berubah, NIS, Id_Kegiatan) VALUES(NULL, '$tanggal_upload', '$catatan', '$sertifikat', '$status', '$tanggal_status_berubah', '$nis', '$id_kegiatan')");
+                    $id_sertifikat_query = mysqli_query($koneksi, "SELECT LAST_INSERT_ID() AS last_id");
+                    $row = mysqli_fetch_assoc($id_sertifikat_query);
+                    $id_sertifikat = $row['last_id'];
+                    $pesan_notifikasi = "Terdapat sertifikat yang baru saja ditambahkan!";
+                    $hasil_notif = mysqli_query($koneksi, "INSERT INTO notifikasi (NIS, Pesan, Status, Id_Sertifikat, isTambah) VALUES ('$nis', '$pesan_notifikasi', 'Unread', '$id_sertifikat', 1)");
+                    if (!$hasil && !$hasil_notif) {
+                        echo "<script>
+                    let intervalId = setInterval(function() {
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Data gagal ditambahkan.',
+                        type: 'error',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        backdrop: false
+                    }).then(() => {
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.php?page=tambah_sertifikat';
+                        }, 1000);
+                    });
+                        clearInterval(intervalId);
+                    }, 2000);
+                    </script>";
+                    } else {
+                        echo "<script>
+                        let intervalId = setInterval(function() {
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: 'Data telah ditambahkan.',
+                            type: 'success',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            backdrop: false
+                        }).then(() => {
+                            setTimeout(() => {
+                                window.location.href = 'dashboard.php?page=sertifikat';
+                            }, 1000);
+                        });
+                            clearInterval(intervalId);
+                        }, 2000);
+                        </script>";
+                    }
                 }
-                }
-                else{
-                    echo "<script>
+            } else{
+                echo "<script>
                 let intervalId = setInterval(function() {
                 Swal.fire({
                     title: 'Gagal!',
@@ -91,7 +147,7 @@ if (isset($_POST['tambah'])) {
                     clearInterval(intervalId);
                 }, 1600);
                 </script>";
-                }
+            }
         }else{
             echo "<script>
             Swal.fire({
@@ -223,7 +279,7 @@ if (isset($_POST['tambah'])) {
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <select name="kegiatan" id="kegiatan" class="wide form-control">
+                                                <select name="kegiatan" id="kegiatan" class="wide default-select form-control">
                                                     <option data-display="Pilihan Kegiatan">Pilih Kegiatan</option>
                                                 </select>
                                                 <div class="invalid-feedback">

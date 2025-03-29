@@ -93,10 +93,20 @@ if (isset($_GET['id_jurusan']) && isset($_GET['confirm_delete']) && $_GET['confi
                                                 <a href="dashboard.php?page=update_jurusan&id_jurusan=<?= $data['Id_Jurusan'] ?>"
                                                     class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                         class="fas fa-pencil-alt"></i></a>
+                                            <?php
+                                                $id = $data['Id_Jurusan'];
+                                                $cek = mysqli_query($koneksi, "SELECT Id_Jurusan FROM siswa  WHERE Id_Jurusan = '$id'");
+                                                if(mysqli_num_rows($cek) > 0){
+                                                    echo "";
+                                                }else {
+                                            ?>
                                                 <a onclick="confirmDelete('<?= $data['Id_Jurusan'] ?>')"
                                                     class="btn btn-danger shadow btn-xs sharp">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
+                                            <?php
+                                                }
+                                            ?>
                                             </div>
                                         </td>
                                     </tr>
